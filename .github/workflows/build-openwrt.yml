@@ -14,7 +14,7 @@ on:
     - cron: '0 17 * * *'
 
 env:
-  REPO_URL: https://github.com/xiangfeidexiaohuo/lede
+  REPO_URL: https://github.com/silinge/lede
   REPO_BRANCH: master
   CONFIG_FILE: .config
   FEEDS_CONF: feeds.conf.default
