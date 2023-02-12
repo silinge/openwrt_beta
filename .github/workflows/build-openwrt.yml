@@ -16,7 +16,7 @@ on:
 env:
   REPO_URL: https://github.com/xiangfeidexiaohuo/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/AX6-5.15.config
+  CONFIG_FILE: .config
   FEEDS_CONF: feeds.conf.default
   DIY_SCRIPT: diy-ax6.sh
   UPLOAD_BIN_DIR: false
