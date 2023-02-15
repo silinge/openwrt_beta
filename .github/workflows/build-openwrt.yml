@@ -10,8 +10,6 @@ name:  AX6编译develop版openwrt
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 17 * * *'
 
 env:
   REPO_URL: https://github.com/silinge/lede
