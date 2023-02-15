@@ -11,8 +11,11 @@
 name: Build Redmi AX6 Include OpenClash
 
 on: 
-  release:
-    types: [published]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 17 * * *'
+  #release:
+    #types: [published]
 
   #push:
     #branches:
