@@ -9,6 +9,7 @@
 #
 
 name: Build AX6 OpenWRT-5.15
+
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -74,7 +75,7 @@ jobs:
         git pull origin master
         git branch --set-upstream-to=origin/master master
        
-   - name: Load custom feeds
+    - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
