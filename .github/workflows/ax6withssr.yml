@@ -24,10 +24,8 @@ on:
     #- cron: 0 8 1,15 * *
 
 env:
-  # REPO_URL: https://github.com/openwrt/openwrt
-  # REPO_BRANCH: master
-  REPO_URL: https://github.com/robimarko/openwrt
-  REPO_BRANCH: ipq807x-5.15-pr-nss-drv
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
   FEEDS_CONF: feeds_ssr.conf.default
   CONFIG_FILE: ax6_ssr.config
   # CONFIG_FILE: ax6_openwrt.config
@@ -68,11 +66,11 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
       # 添加红米ax6 编译选项
-    #- name: Redmi ax6 support
-      #run: |
-        #cp -rf $GITHUB_WORKSPACE/ax6/generic.mk openwrt/target/linux/ipq807x/image/generic.mk
+    - name: Redmi ax6 support
+      run: |
+        cp -rf $GITHUB_WORKSPACE/ax6/generic.mk openwrt/target/linux/ipq807x/image/generic.mk
         
-       # 配置 openClash
+      # 配置 openClash
     - name: OpenClash
       run: |
         mkdir openwrt/package/luci-app-openclash
