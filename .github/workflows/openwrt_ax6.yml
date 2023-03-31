@@ -76,6 +76,12 @@ jobs:
         git pull origin master
         git branch --set-upstream-to=origin/master master
         
+    - name: add luci
+      run: |
+        ./scripts/feeds update luci
+        ./scripts/feeds install -a -p luci
+        
+      
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
@@ -97,10 +103,7 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_P2_SH
         ./scripts/feeds update -a
         ./scripts/feeds install -a -f
-    - name: add luci
-      run: |
-        ./scripts/feeds update luci
-        ./scripts/feeds install -a -p luci
+    
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
