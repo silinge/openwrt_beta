@@ -67,9 +67,6 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        cd lede
-        git checkout 26f3634
-        git checkout -b 26f3634
       # 添加红米ax6 编译选项
     - name: Redmi ax6 support
       run: |
