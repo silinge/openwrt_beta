@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build Redmi AX6 Include OpenClash
+name: local_lede
 # name: ax6_ssr_full
 
 on: 
