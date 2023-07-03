@@ -69,9 +69,9 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
       # 添加红米ax6 编译选项
-    - name: Redmi ax6 support
-      run: |
-        cp -rf $GITHUB_WORKSPACE/ax6/generic.mk openwrt/target/linux/ipq807x/image/generic.mk
+   #  - name: Redmi ax6 support
+     # run: |
+        # cp -rf $GITHUB_WORKSPACE/ax6/generic.mk openwrt/target/linux/ipq807x/image/generic.mk
     # 配置 openClash
     - name: OpenClash
       run: |
