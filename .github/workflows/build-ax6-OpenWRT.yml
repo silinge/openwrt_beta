@@ -28,6 +28,8 @@ env:
   CONFIG_FILE: AX6-openwrt.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: ax6/diy-part2-ax6.sh
+#  DIY_P3_SH: diy-part3.sh
+#  SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: true
@@ -178,29 +180,30 @@ jobs:
         df -hT ${PWD}
 
     - name: Upload bin directory
-      uses: actions/upload-artifact@main
+      uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
-    # 整理编译好的固件
+
     - name: Organize files
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
+        cd $GITHUB_WORKSPACE
+        tar -zcvf AllPackages.tar.gz openwrt/bin/packages
+        cp AllPackages.tar.gz openwrt/bin/targets/*/*
         cd openwrt/bin/targets/*/*
-        rm -rf packages
-        rm -rf *.buildinfo
-        rm -rf sha256sums
-        rm -rf *.manifest
-        rm -rf *kernel.bin
-        rm -rf *.itb
-        rm -rf *.json
+        rm -rf packages config.buildinfo feeds.buildinfo sha256sums version.buildinfo
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-        echo "status=success" >> $GITHUB_OUTPUT
+        echo "status=success" >> ${GITHUB_OUTPUT}
+#        echo "::set-env name=FIRMWARE::$PWD"
+        
     - name: Upload firmware directory
-      uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()
+      uses: actions/upload-artifact@master
+      if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
+
+   
